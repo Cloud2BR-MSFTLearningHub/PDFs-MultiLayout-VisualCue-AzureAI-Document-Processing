@@ -12,7 +12,6 @@ Last updated: 2025-10-29
 
 > `How we move from basic coding all the way to AI agents?`
 
-
 ```mermaid
 flowchart LR
     A[Scripting: Line-by-line instructions] --> B[Machine Learning: Packages + statistical foundations]
