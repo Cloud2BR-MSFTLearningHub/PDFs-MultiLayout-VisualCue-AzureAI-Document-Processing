@@ -2,14 +2,6 @@
 
 `Azure Storage + Document Intelligence + AI Vision + Azure Open AI (LLMs) + Function App +  Cosmos DB`
 
-Costa Rica
-
-[![GitHub](https://img.shields.io/badge/--181717?logo=github&logoColor=ffffff)](https://github.com/) [Cloud2BR OSS - Learning Hub](https://github.com/Cloud2BR-MSFTLearningHub)
-
-Last updated: 2025-10-29
-
------------------------------
-
 > `How we move from basic coding all the way to AI agents?`
 
 ```mermaid
@@ -29,7 +21,7 @@ flowchart LR
     D:::step
 ```
 
-<details>
+<details markdown="1">
 <summary><b> More details about it here </b> (Click to expand)</summary>
   
 > - We all `start with scripting`, no matter the language, it’s the first step. `Simple/complex instructions, written line by line`, to get something done
@@ -39,8 +31,8 @@ flowchart LR
 
 </details>
 
-> [!NOTE]
-> A landing zone is a general `cloud framework that sets up the core structure for all workloads`. Each use case (like an app, data pipeline, or API) then builds on top of this framework, using the `same environments (Dev → Test → UAT → Prod) and CI/CD pipelines to move code safely into production.` It’s general by design, but `applied per use case.`
+!!! note "Landing zone"
+  A landing zone is a general `cloud framework that sets up the core structure for all workloads`. Each use case, such as an app, data pipeline, or API, builds on this framework using the same environments (Dev → Test → UAT → Prod) and CI/CD pipelines to move code safely into production. It is general by design, but applied per use case.
 
 > This solution is designed to be flexible and robust, supporting multiple versions of PDF documents with varying layouts, including those that use visual selection cues such as gray fills, hand-drawn Xs, checkmarks, or circles. By building on the [PDFs-Layouts-Processing-Fapp-DocIntelligence](https://github.com/MicrosoftCloudEssentials-LearningHub/PDFs-Layouts-Processing-Fapp-DocIntelligence) repository, modular approach aiming to:
 
@@ -51,10 +43,10 @@ flowchart LR
 - Multiple file formats are supported, including PDFs and various image formats.
 - The logic is abstracted to support multiple layout variations, so the system adapts easily to new document formats and selection styles.
 
-> [!IMPORTANT]
-> This example is based on a `public network site and is intended for demonstration purposes only`. It showcases how several Azure resources can work together to achieve the desired result. Consider the section below about [Important Considerations for Production Environment](#important-considerations-for-production-environment). Please note that `these demos are intended as a guide and are based on my personal experiences. For official guidance, support, or more detailed information, please refer to Microsoft's official documentation or contact Microsoft directly`: [Microsoft Sales and Support](https://support.microsoft.com/contactus?ContactUsExperienceEntryPointAssetId=S.HP.SMC-HOME)
+!!! warning "Demo scope"
+  This example uses public networking and is intended for demonstration purposes only. Review [Important Considerations for Production Environment](#important-considerations-for-production-environment) before adapting it. The guidance is based on personal experience; for official support, use [Microsoft Sales and Support](https://support.microsoft.com/contactus?ContactUsExperienceEntryPointAssetId=S.HP.SMC-HOME).
 
-<details>
+<details markdown="1">
 <summary><b>List of References</b> (Click to expand)</summary>
 
 - [Power Apps pricing](https://www.microsoft.com/en-us/power-platform/products/power-apps/)
@@ -121,7 +113,7 @@ flowchart LR
   
 </details>
 
-<details>
+<details markdown="1">
 <summary><b>Table of Content</b> (Click to expand)</summary>
   
 - [Important Considerations for Production Environment](#important-considerations-for-production-environment)
@@ -144,28 +136,25 @@ flowchart LR
 >     - Azure OpenAI understands what the document actually means 
 > 3. Centralized information management: `All extracted data is stored in Cosmos DB`, organized and accessible. The system `adapts to differents document layouts without requiring custom code for each format.`
 
-> [!NOTE]
-> Advantages of Document Intelligence for organizations handling with large volumes of documents: <br/>
->
-> - Utilizes natural language processing, computer vision, deep learning, and machine learning. <br/>
-> - Handles structured, semi-structured, and unstructured documents. <br/>
-> - Automates the extraction and transformation of layout data into usable formats like JSON or CSV.
+!!! note "Document Intelligence advantages"
+  For organizations handling large document volumes, Document Intelligence:
+
+  - Uses natural language processing, computer vision, deep learning, and machine learning.
+  - Handles structured, semi-structured, and unstructured documents.
+  - Automates extraction and transformation of layout data into formats such as JSON or CSV.
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/322c8d9b-5ca3-4ba4-b0cd-ac14f198229e" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
 </div>
 
-> [!NOTE]
-> Azure Event Grid System Topics are free to create and manage, a System Topic is automatically created and managed by Azure for certain Azure services that emit events. It represents a source of events from an Azure resource (like a Storage Account, Key Vault, or Azure Maps). `You don't need to create or manage the topic yourself, Azure does it for you when you enable event publishing on a supported resource.` <br/>
->
-> - Emits predefined event types (e.g., Microsoft.Storage.BlobCreated, Microsoft.Resources.ResourceWriteSuccess). <br/>
-> - You can attach event handlers (like Azure Functions, Logic Apps, Webhooks) to respond to these events. <br/>
-> - Works seamlessly with serverless architectures for real-time automation. <br/>
-> For example:
-> Suppose you have a Storage Account and want to trigger a function every time a new blob is uploaded: <br/>
-> - Azure automatically creates a System Topic for the Storage Account.
-> - You subscribe to the BlobCreated event.
-> - When a blob is uploaded, Event Grid routes the event to your Azure Function.
+!!! note "Event Grid system topics"
+  Azure automatically creates and manages a system topic when a supported resource, such as a Storage Account or Key Vault, emits events. You only configure the event subscription.
+
+  - It emits predefined event types such as `Microsoft.Storage.BlobCreated`.
+  - You can attach handlers such as Azure Functions, Logic Apps, and webhooks.
+  - It supports serverless, event-driven processing without a separately managed topic.
+
+  For example, subscribe an Azure Function to `BlobCreated` on a Storage Account. When a blob is uploaded, Event Grid routes the event to the function.
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/298ce8db-af28-487c-8126-9ba74986e8a5" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
@@ -173,14 +162,14 @@ flowchart LR
 
 ## Important Considerations for Production Environment
 
-<details>
+<details markdown="1">
   <summary>Private Network Configuration</summary>
 
  > For enhanced security, consider configuring your Azure resources to operate within a private network. This can be achieved using Azure Virtual Network (VNet) to isolate your resources and control inbound and outbound traffic. Implementing private endpoints for services like Azure Blob Storage and Azure Functions can further secure your data by restricting access to your VNet.
 
 </details>
 
-<details>
+<details markdown="1">
   <summary>Security</summary>
 
   > Ensure that you implement appropriate security measures when deploying this solution in a production environment. This includes: <br/>
@@ -191,7 +180,7 @@ flowchart LR
 
 </details>
 
-<details>
+<details markdown="1">
   <summary>Scalability</summary>
 
   > While this example provides a basic setup, you may need to scale the resources based on your specific requirements. Azure services offer various scaling options to handle increased workloads. Consider using: <br/>
@@ -201,20 +190,20 @@ flowchart LR
 
 </details>
 
-<details>
+<details markdown="1">
   <summary>Cost Management</summary>
 
   > Monitor and manage the costs associated with your Azure resources. Use Azure Cost Management and Billing to track usage and optimize resource allocation.
 
 </details>
 
-<details>
+<details markdown="1">
   <summary>Compliance</summary>
 
   > Ensure that your deployment complies with relevant regulations and standards. Use Azure Policy to enforce compliance and governance policies across your resources.
 </details>
 
-<details>
+<details markdown="1">
   <summary>Disaster Recovery</summary>
    
 > Implement a disaster recovery plan to ensure business continuity in case of failures. Use Azure Site Recovery and backup solutions to protect your data and applications.
@@ -231,11 +220,11 @@ flowchart LR
 
 ## Where to start? 
 
-1. Please follow the [Terraform guide](./terraform-infrastructure/) to deploy the necessary Azure resources for the workshop.
+1. Please follow the [Terraform guide](deployment/terraform.md) to deploy the necessary Azure resources for the workshop.
 2. Next, as this method `skips the creation of each resource` manually. Proceed with the configuration from [Configure/Validate the Environment variables](#function-app-configurevalidate-the-environment-variables).
 
-> [!IMPORTANT]
-> Regarding `Networking`, this example will cover `Public access configuration`, and `system-managed identity`. However, please ensure you `review your privacy requirements and adjust network and access settings as necessary for your specific case`.
+!!! warning "Networking and access"
+  This example uses public access and a system-assigned managed identity. Review privacy requirements and adjust networking and access controls for your environment.
 
 ## Overview 
 
@@ -255,22 +244,15 @@ flowchart LR
 
 > In the context of Azure Function Apps, a `hosting option refers to the plan you choose to run your function app`. This choice affects how your function app is scaled, the resources available to each function app instance, and the support for advanced functionalities like virtual network connectivity and container support.
 
-> [!TIP]  
->
-> - `Scale to Zero`: Indicates whether the service can automatically scale down to zero instances when idle.  
->   - **IDLE** stands for:  
->     - **I** – Inactive  
->     - **D** – During  
->     - **L** – Low  
->     - **E** – Engagement  
->   - In other words, when the application is not actively handling requests or events (it's in a low-activity or paused state).
-> - `Scale Behavior`: Describes how the service scales (e.g., `event-driven`, `dedicated`, or `containerized`).  
-> - `Virtual Networking`: Whether the service supports integration with virtual networks for secure communication.  
-> - `Dedicated Compute & Reserved Cold Start`: Availability of always-on compute to avoid cold starts and ensure low latency.  
-> - `Max Scale Out (Instances)`: Maximum number of instances the service can scale out to.  
-> - `Example AI Use Cases`: Real-world scenarios where each plan excels.
+!!! tip "Hosting option terms"
+  - `Scale to Zero`: Whether the service can automatically scale to zero instances while idle.
+  - `Scale Behavior`: How the service scales, such as `event-driven`, `dedicated`, or `containerized`.
+  - `Virtual Networking`: Support for secure virtual-network integration.
+  - `Dedicated Compute & Reserved Cold Start`: Availability of always-on compute to reduce cold starts.
+  - `Max Scale Out (Instances)`: The maximum number of instances that can run.
+  - `Example AI Use Cases`: Workloads for which the hosting plan is well suited.
 
-<details>
+<details markdown="1">
 <summary><strong>Flex Consumption</strong></summary>
 
 | Feature | Description |
@@ -284,7 +266,7 @@ flowchart LR
 
 </details>
 
-<details>
+<details markdown="1">
 <summary><strong>Consumption</strong></summary>
 
 | Feature | Description |
@@ -298,7 +280,7 @@ flowchart LR
 
 </details>
 
-<details>
+<details markdown="1">
 <summary><strong>Functions Premium</strong></summary>
 
 | Feature | Description |
@@ -312,7 +294,7 @@ flowchart LR
 
 </details>
 
-<details>
+<details markdown="1">
 <summary><strong>App Service</strong></summary>
 
 | Feature | Description |
@@ -326,7 +308,7 @@ flowchart LR
 
 </details>
 
-<details>
+<details markdown="1">
 <summary><strong>Container Apps Env.</strong></summary>
 
 | Feature | Description |
@@ -342,11 +324,11 @@ flowchart LR
 
 ## Function App: Configure/Validate the Environment variables
 
-> [!IMPORTANT]
-> `All environment variable names must exactly match between` your `Terraform deployment configuration` (in `main.tf`) and your `Function App environment settings`. Any mismatch will cause runtime failures when the application tries to access Azure resources.
+!!! warning "Environment variable names"
+  Every environment variable name must match between the Terraform deployment configuration in `main.tf` and Function App settings. Mismatches cause runtime failures when the application accesses Azure resources.
 
-> [!NOTE]
-> This example is using system-assigned managed identity to assign RBACs (Role-based Access Control).
+!!! note "Managed identity and RBAC"
+  This example uses a system-assigned managed identity for role-based access control (RBAC).
 
 - Under `Settings`, go to `Environment variables`. And `+ Add` the following variables. For example:
 
@@ -372,7 +354,7 @@ flowchart LR
 - `FUNCTIONS_NODE_BLOCK_ON_ENTRY_POINT_ERROR`: `true` (This setting ensures that all entry point errors are visible in your application insights logs) 🡢 `Review the existence of this, if not create it`
 - `COSMOS_DB_ENDPOINT`: Your Cosmos DB account endpoint 🡢 `Review the existence of this, if not create it`
     
-<details>
+<details markdown="1">
 <summary><b> </b> Click to see more</summary>
 
 - `COSMOS_DB_KEY`: Your Cosmos DB account key 🡢 `Review the existence of this, if not create it`
@@ -493,13 +475,13 @@ flowchart LR
   >     - Includes processing time metrics for performance analysis.
   >     - Provides comprehensive error handling with meaningful diagnostics.
 
-  - Update the function_app.py, for example [see the code used in this demo](./src/function_app.py):
+  - Update the function_app.py, for example [see the code used in this demo](https://github.com/Cloud2BR-MSFTLearningHub/PDFs-MultiLayout-VisualCue-AzureAI-Document-Processing/blob/main/src/function_app.py):
 
       | Template Blob Trigger | Function Code updated |
       | --- | --- |
       |   <img width="550" alt="image" src="https://github.com/user-attachments/assets/07a7b285-eed2-4b42-bb1f-e41e8eafd273"> |  <img width="550" alt="image" src="https://github.com/user-attachments/assets/d364591b-817e-4f36-8c50-7de187c32a1e">|
 
-  - Now, let's update the `requirements.txt`, [see the code used in this demo](./src/requirements.txt):
+  - Now, let's update the `requirements.txt`, [see the code used in this demo](https://github.com/Cloud2BR-MSFTLearningHub/PDFs-MultiLayout-VisualCue-AzureAI-Document-Processing/blob/main/src/requirements.txt):
 
     | Template `requirements.txt` | Updated `requirements.txt` |
     | --- | --- |
@@ -522,22 +504,16 @@ flowchart LR
 
          <img width="550" alt="image" src="https://github.com/user-attachments/assets/78aab42c-af43-43aa-a4c0-545f4445755b">
 
-> [!IMPORTANT]
-> If you need further assistance with the code, please click [here to view all the function code](./src/).
+!!! note "Function source code"
+  Review the complete [Function App source code](https://github.com/Cloud2BR-MSFTLearningHub/PDFs-MultiLayout-VisualCue-AzureAI-Document-Processing/tree/main/src).
 
-> [!NOTE]
-> Please ensure that all specified roles are assigned to the Function App. The provided example used `System assigned` for the Function App to facilitate the role assignment.
+!!! note "Role assignments"
+  Ensure all required roles are assigned to the Function App. This example uses its system-assigned identity to facilitate role assignment.
 
 ## Test the solution
 
-> [!IMPORTANT]
-> Please ensure that the user/system admin responsible for uploading the PDFs to the blob container has the necessary permissions. The error below illustrates what might occur if these roles are missing. <br/> 
-> <img width="550" alt="image" src="https://github.com/user-attachments/assets/d827775a-d419-467e-9b2d-35cb05bc0f8a"> <br/>
-> In that case, go to `Access Control (IAM)`, click on `+ Add`, and `Add role assignment`: <br/>
-> <img width="550" alt="image" src="https://github.com/user-attachments/assets/aa4deff1-b6e1-49ec-9395-831ce2f982f5"> <br/>
-> Search for `Storage Blob Data Contributor`, click `Next`. <br/>
-> <img width="550" alt="image" src="https://github.com/user-attachments/assets/1fd40ef8-53f7-42df-a263-5bc3c80e61ba"> <br/>
-> Then, click on `select members` and search for your user/systen admin. Finally click on `Review + assign`.
+!!! warning "Upload permissions"
+  The user or system identity that uploads PDFs needs the required Blob Storage permissions. In Azure portal, open **Access Control (IAM)**, select **Add role assignment**, and assign **Storage Blob Data Contributor** to the user or system identity.
 
 > Upload sample PDF invoices to the Blob container and verify that data is correctly ingested and stored in Cosmos DB.
 
@@ -563,11 +539,4 @@ flowchart LR
 
 - Validate that the information was uploaded to the Cosmos DB. Under `Data Explorer`, check your `Database`.
 
-   <img width="550" alt="image" src="https://github.com/user-attachments/assets/27309a6d-c654-4c76-bbc1-990a9338973c">
-
-<!-- START BADGE -->
-<div align="center">
-  <img src="https://img.shields.io/badge/Total%20views-1297-limegreen" alt="Total views">
-  <p>Refresh Date: 2025-10-29</p>
-</div>
-<!-- END BADGE -->
+  <img width="550" alt="image" src="https://github.com/user-attachments/assets/27309a6d-c654-4c76-bbc1-990a9338973c">

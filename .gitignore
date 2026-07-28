@@ -122,6 +122,7 @@ simple_pdf_analysis.py
 # Generated metrics and documentation
 metrics.json
 README-SETUP.md
+site/
 
 # Performance test results
 *.perf
