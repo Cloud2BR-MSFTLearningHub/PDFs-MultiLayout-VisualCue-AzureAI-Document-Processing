@@ -31,8 +31,8 @@ flowchart LR
 
 </details>
 
-!!! note "Landing zone"
-  A landing zone is a general `cloud framework that sets up the core structure for all workloads`. Each use case, such as an app, data pipeline, or API, builds on this framework using the same environments (Dev → Test → UAT → Prod) and CI/CD pipelines to move code safely into production. It is general by design, but applied per use case.
+> **Note: Landing zone**
+> A landing zone is a general `cloud framework that sets up the core structure for all workloads`. Each use case, such as an app, data pipeline, or API, builds on this framework using the same environments (Dev → Test → UAT → Prod) and CI/CD pipelines to move code safely into production. It is general by design, but applied per use case.
 
 > This solution is designed to be flexible and robust, supporting multiple versions of PDF documents with varying layouts, including those that use visual selection cues such as gray fills, hand-drawn Xs, checkmarks, or circles. By building on the [PDFs-Layouts-Processing-Fapp-DocIntelligence](https://github.com/MicrosoftCloudEssentials-LearningHub/PDFs-Layouts-Processing-Fapp-DocIntelligence) repository, modular approach aiming to:
 
@@ -43,8 +43,8 @@ flowchart LR
 - Multiple file formats are supported, including PDFs and various image formats.
 - The logic is abstracted to support multiple layout variations, so the system adapts easily to new document formats and selection styles.
 
-!!! warning "Demo scope"
-  This example uses public networking and is intended for demonstration purposes only. Review [Important Considerations for Production Environment](#important-considerations-for-production-environment) before adapting it. The guidance is based on personal experience; for official support, use [Microsoft Sales and Support](https://support.microsoft.com/contactus?ContactUsExperienceEntryPointAssetId=S.HP.SMC-HOME).
+> **Warning: Demo scope**
+> This example uses public networking and is intended for demonstration purposes only. Review [Important Considerations for Production Environment](#important-considerations-for-production-environment) before adapting it. The guidance is based on personal experience; for official support, use [Microsoft Sales and Support](https://support.microsoft.com/contactus?ContactUsExperienceEntryPointAssetId=S.HP.SMC-HOME).
 
 <details markdown="1">
 <summary><b>List of References</b> (Click to expand)</summary>
@@ -136,25 +136,25 @@ flowchart LR
 >     - Azure OpenAI understands what the document actually means 
 > 3. Centralized information management: `All extracted data is stored in Cosmos DB`, organized and accessible. The system `adapts to differents document layouts without requiring custom code for each format.`
 
-!!! note "Document Intelligence advantages"
-  For organizations handling large document volumes, Document Intelligence:
-
-  - Uses natural language processing, computer vision, deep learning, and machine learning.
-  - Handles structured, semi-structured, and unstructured documents.
-  - Automates extraction and transformation of layout data into formats such as JSON or CSV.
+> **Note: Document Intelligence advantages**
+> For organizations handling large document volumes, Document Intelligence:
+>
+> - Uses natural language processing, computer vision, deep learning, and machine learning.
+> - Handles structured, semi-structured, and unstructured documents.
+> - Automates extraction and transformation of layout data into formats such as JSON or CSV.
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/322c8d9b-5ca3-4ba4-b0cd-ac14f198229e" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
 </div>
 
-!!! note "Event Grid system topics"
-  Azure automatically creates and manages a system topic when a supported resource, such as a Storage Account or Key Vault, emits events. You only configure the event subscription.
-
-  - It emits predefined event types such as `Microsoft.Storage.BlobCreated`.
-  - You can attach handlers such as Azure Functions, Logic Apps, and webhooks.
-  - It supports serverless, event-driven processing without a separately managed topic.
-
-  For example, subscribe an Azure Function to `BlobCreated` on a Storage Account. When a blob is uploaded, Event Grid routes the event to the function.
+> **Note: Event Grid system topics**
+> Azure automatically creates and manages a system topic when a supported resource, such as a Storage Account or Key Vault, emits events. You only configure the event subscription.
+>
+> - It emits predefined event types such as `Microsoft.Storage.BlobCreated`.
+> - You can attach handlers such as Azure Functions, Logic Apps, and webhooks.
+> - It supports serverless, event-driven processing without a separately managed topic.
+>
+> For example, subscribe an Azure Function to `BlobCreated` on a Storage Account. When a blob is uploaded, Event Grid routes the event to the function.
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/298ce8db-af28-487c-8126-9ba74986e8a5" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
@@ -220,11 +220,11 @@ flowchart LR
 
 ## Where to start? 
 
-1. Please follow the [Terraform guide](deployment/terraform.md) to deploy the necessary Azure resources for the workshop.
+1. Please follow the [Terraform guide](https://cloud2br-msftlearninghub.github.io/PDFs-MultiLayout-VisualCue-AzureAI-Document-Processing/deployment/terraform/) to deploy the necessary Azure resources for the workshop.
 2. Next, as this method `skips the creation of each resource` manually. Proceed with the configuration from [Configure/Validate the Environment variables](#function-app-configurevalidate-the-environment-variables).
 
-!!! warning "Networking and access"
-  This example uses public access and a system-assigned managed identity. Review privacy requirements and adjust networking and access controls for your environment.
+> **Warning: Networking and access**
+> This example uses public access and a system-assigned managed identity. Review privacy requirements and adjust networking and access controls for your environment.
 
 ## Overview 
 
@@ -244,13 +244,13 @@ flowchart LR
 
 > In the context of Azure Function Apps, a `hosting option refers to the plan you choose to run your function app`. This choice affects how your function app is scaled, the resources available to each function app instance, and the support for advanced functionalities like virtual network connectivity and container support.
 
-!!! tip "Hosting option terms"
-  - `Scale to Zero`: Whether the service can automatically scale to zero instances while idle.
-  - `Scale Behavior`: How the service scales, such as `event-driven`, `dedicated`, or `containerized`.
-  - `Virtual Networking`: Support for secure virtual-network integration.
-  - `Dedicated Compute & Reserved Cold Start`: Availability of always-on compute to reduce cold starts.
-  - `Max Scale Out (Instances)`: The maximum number of instances that can run.
-  - `Example AI Use Cases`: Workloads for which the hosting plan is well suited.
+> **Tip: Hosting option terms**
+> - `Scale to Zero`: Whether the service can automatically scale to zero instances while idle.
+> - `Scale Behavior`: How the service scales, such as `event-driven`, `dedicated`, or `containerized`.
+> - `Virtual Networking`: Support for secure virtual-network integration.
+> - `Dedicated Compute & Reserved Cold Start`: Availability of always-on compute to reduce cold starts.
+> - `Max Scale Out (Instances)`: The maximum number of instances that can run.
+> - `Example AI Use Cases`: Workloads for which the hosting plan is well suited.
 
 <details markdown="1">
 <summary><strong>Flex Consumption</strong></summary>
@@ -324,11 +324,11 @@ flowchart LR
 
 ## Function App: Configure/Validate the Environment variables
 
-!!! warning "Environment variable names"
-  Every environment variable name must match between the Terraform deployment configuration in `main.tf` and Function App settings. Mismatches cause runtime failures when the application accesses Azure resources.
+> **Warning: Environment variable names**
+> Every environment variable name must match between the Terraform deployment configuration in `main.tf` and Function App settings. Mismatches cause runtime failures when the application accesses Azure resources.
 
-!!! note "Managed identity and RBAC"
-  This example uses a system-assigned managed identity for role-based access control (RBAC).
+> **Note: Managed identity and RBAC**
+> This example uses a system-assigned managed identity for role-based access control (RBAC).
 
 - Under `Settings`, go to `Environment variables`. And `+ Add` the following variables. For example:
 
@@ -504,16 +504,16 @@ flowchart LR
 
          <img width="550" alt="image" src="https://github.com/user-attachments/assets/78aab42c-af43-43aa-a4c0-545f4445755b">
 
-!!! note "Function source code"
-  Review the complete [Function App source code](https://github.com/Cloud2BR-MSFTLearningHub/PDFs-MultiLayout-VisualCue-AzureAI-Document-Processing/tree/main/src).
+> **Note: Function source code**
+> Review the complete [Function App source code](https://github.com/Cloud2BR-MSFTLearningHub/PDFs-MultiLayout-VisualCue-AzureAI-Document-Processing/tree/main/src).
 
-!!! note "Role assignments"
-  Ensure all required roles are assigned to the Function App. This example uses its system-assigned identity to facilitate role assignment.
+> **Note: Role assignments**
+> Ensure all required roles are assigned to the Function App. This example uses its system-assigned identity to facilitate role assignment.
 
 ## Test the solution
 
-!!! warning "Upload permissions"
-  The user or system identity that uploads PDFs needs the required Blob Storage permissions. In Azure portal, open **Access Control (IAM)**, select **Add role assignment**, and assign **Storage Blob Data Contributor** to the user or system identity.
+> **Warning: Upload permissions**
+> The user or system identity that uploads PDFs needs the required Blob Storage permissions. In Azure portal, open **Access Control (IAM)**, select **Add role assignment**, and assign **Storage Blob Data Contributor** to the user or system identity.
 
 > Upload sample PDF invoices to the Blob container and verify that data is correctly ingested and stored in Cosmos DB.
 
